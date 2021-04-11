@@ -1,1 +1,1 @@
-web:gunicorn app:primersUI/app
+web:gunicorn app:app
