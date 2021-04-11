@@ -2,6 +2,8 @@ import os
 from flask import Flask
 from flask import (flash, request, render_template, url_for, redirect)
 
+import script
+
 # create and configure the app
 app = Flask(__name__)
 app.config.from_mapping(
@@ -24,13 +26,16 @@ def start():
             error = 'Exon 2 sequence is required.'
 
         if error is None:
-            return redirect(url_for('results'))
+            hits = script.hits_from_exons(exon1, exon2)
+            return redirect(url_for('results', forward=str(hits["forward"]), reverse=str(hits["reverse"])))
 
         flash(error)
 
     return render_template('start.html')
 
 # show results page with primer candidates
-@app.route('/results', methods=('GET', 'POST'))
+@app.route('/results')
 def results():
-    return render_template('results.html', forward='Hi', reverse='World')
+    forward = request.args['forward']
+    reverse = request.args['reverse']
+    return render_template('results.html', forward=forward, reverse=reverse)
