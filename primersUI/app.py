@@ -1,6 +1,6 @@
 import os
 from flask import Flask
-from flask import (flash, request, render_template, url_for, redirect)
+from flask import (flash, request, render_template, url_for, redirect, session)
 
 import script
 
@@ -27,7 +27,8 @@ def start():
 
         if error is None:
             hits = script.hits_from_exons(exon1, exon2)
-            return redirect(url_for('results', forward=str(hits["forward"]), reverse=str(hits["reverse"])))
+            session["hits"] = hits
+            return redirect(url_for('results'))
 
         flash(error)
 
@@ -36,6 +37,5 @@ def start():
 # show results page with primer candidates
 @app.route('/results')
 def results():
-    forward = request.args['forward']
-    reverse = request.args['reverse']
-    return render_template('results.html', forward=forward, reverse=reverse)
+    hits = session["hits"]
+    return render_template('results.html', forward=str(hits["forward"]), reverse=str(hits["reverse"]))
