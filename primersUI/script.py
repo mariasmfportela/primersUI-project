@@ -20,12 +20,17 @@ def find_hit_in_sequence(gene):
 
 
 def hits_from_exons(exon1, exon2):
+    # Remove white spaces or irrelevant characters
+    exon1 = exon1.strip()
+    exon2 = exon2.strip()
+
     # Reverse exon 1 as GC clamp should be at the end of the primer
     exon1 = exon1[::-1]
     hits_exon1 = []
     for elem in find_hit_in_sequence(exon1):
         hits_exon1.append(elem[::-1])
 
+    # Find hits for exon 2
     hits_exon2 = find_hit_in_sequence(exon2)
 
     return {
