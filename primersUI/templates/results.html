@@ -5,6 +5,16 @@
 {% endblock %}
 
 {% block content %}
-    <p>Forward primer candidates (5'-3'): {{ forward }}</p>
-    <p>Reverse primer candidates (5'-3'): {{ reverse }}</p>
+    <p>This program doesn't check for complementarity or potential hairpin formation.</p>
+
+    {% if forward == [] %}
+        <p>Forward primer candidates (5'-3'): No candidates found. Please refine your search parameters</p>
+    {% else %}
+        <p>Forward primer candidates (5'-3'): {{ forward }}</p>
+    {% endif %}
+    {% if reverse == [] %}
+        <p>Reverse primer candidates (5'-3'): No candidates found. Please refine your search parameters</p>
+    {% else %}
+        <p>Reverse primer candidates (5'-3'): {{ reverse }}</p>
+    {% endif %}
 {% endblock %}
