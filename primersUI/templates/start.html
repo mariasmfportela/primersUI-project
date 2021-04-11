@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Sequence Input{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="exon1">Exon 1:</label>
+    <input name="exon1" id="exon1" required>
+    <label for="exon2">Exon 2:</label>
+    <input name="exon2" id="exon2" required>
+
+    <!-- Future implementation
+    <label for="sequence">FASTA sequence:</label>
+    <input name="sequence" id="sequence" required>
+    <label for="primer-length">Primer length (10 to 30):</label>
+    <input type="Number" name="primer-length" id="primer-length" value="20" min="10" max="30" step="1">
+    <label for="product-length">Product length (100 to 500):</label>
+    <input type="range" name="product-length" id="product-length" value="200" min="100" max="500" step="10">
+    <label for="gc-content">%GC content (40-70):</label>
+    <input type="range" name="gc-content" id="gc-content" value="55" min="40" max="70" step="5">
+    <input type="reset">
+    -->
+
+    <input type="submit" value="Find">
+  </form>
+{% endblock %}
