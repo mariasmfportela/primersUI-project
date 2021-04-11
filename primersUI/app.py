@@ -1,13 +1,13 @@
 import os
 from flask import Flask
-from flask import (flash, request, render_template, url_for)
+from flask import (flash, request, render_template, url_for, redirect)
 
 # create and configure the app
 app = Flask(__name__)
 
 
 # start page where the user inputs sequence and preferences
-@app.route('/', methods=('GET', 'POST'))
+@app.route('/', methods=['GET', 'POST'])
 def start():
     if request.method == 'POST':
         exon1 = request.form['exon1']
@@ -23,3 +23,7 @@ def start():
         flash(error)
 
     return render_template('start.html')
+
+@app.route('/results', methods=('GET', 'POST'))
+def results():
+    return render_template('results.html')
