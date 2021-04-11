@@ -1,1 +1,1 @@
-web: gunicorn app:--pythonpath primersUI app
+web: gunicorn primersUI:app
