@@ -4,6 +4,9 @@ from flask import (flash, request, render_template, url_for, redirect)
 
 # create and configure the app
 app = Flask(__name__)
+app.config.from_mapping(
+    SECRET_KEY='dev',
+)
 
 
 # start page where the user inputs sequence and preferences
@@ -20,10 +23,14 @@ def start():
         elif not exon2:
             error = 'Exon 2 sequence is required.'
 
+        if error is None:
+            return redirect(url_for('results'))
+
         flash(error)
 
     return render_template('start.html')
 
+# show results page with primer candidates
 @app.route('/results', methods=('GET', 'POST'))
 def results():
-    return render_template('results.html')
+    return render_template('results.html', forward='Hi', reverse='World')
